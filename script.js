@@ -54,7 +54,6 @@ window.onload = function(){
 function update(){
     if(gameOver){
         board.style.border = '8px solid red'
-        location.reload()
         return
     }
 
