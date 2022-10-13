@@ -1,6 +1,5 @@
 
 
-
 var blockSize = 25;
 var rows = 20;
 var cols = 20;
@@ -27,9 +26,21 @@ var snakeBody = []
 
 
 var gameOver = false
+var score = 0;
+var getname;
+
+
 
 window.onload = function(){
     board = document.getElementById('board')
+    scorebox = document.getElementById('score') 
+    getname = document.getElementById('name') 
+    board.style.border = '2px solid #fff'
+
+    // Taking user Name
+    let playerName = prompt('Enter Name and Have Fun with Your Friends !')
+    getname.innerHTML = playerName
+    
     board.height = rows * blockSize
     board.width = cols * blockSize
     context = board.getContext('2d')
@@ -42,9 +53,13 @@ window.onload = function(){
 
 function update(){
     if(gameOver){
+        board.style.border = '8px solid red'
+        location.reload()
         return
     }
-    context.fillStyle = 'black'
+
+    scorebox.innerHTML = score
+    context.fillStyle = '#1b1b1e'
     context.fillRect(0,0, board.width, board.height)
 
     context.fillStyle = 'red'
@@ -52,9 +67,8 @@ function update(){
 
 
     if(foodX === snakeX && foodY === snakeY){
-        console.log('FoodX:', foodX ,'foodY:', foodY)
-        console.log('Snake Body:',snakeBody)
-        snakeBody.push([foodX , foodY])
+        snakeBody.push([snakeX , snakeY])
+        score +=2
         foodRandomPosition()
     }
 
@@ -76,15 +90,13 @@ function update(){
         context.fillRect(snakeBody[i][0], snakeBody[i][1] , blockSize, blockSize)
     }
 
-    if(snakeX < 0 || snakeX > cols* blockSize || snakeY < 0 || snakeY > rows* blockSize ){
+    if(snakeX < 0 || snakeX >= cols* blockSize || snakeY < 0 || snakeY >= rows* blockSize ){
         gameOver = true
-        alert('Game Over')
     }
     
     for(let i=0;i<snakeBody.length ;i++){
         if(snakeX === snakeBody[i][0] && snakeY === snakeBody[i][1]){
             gameOver = true
-            alert('Game Over')
         }
     }
 }
@@ -109,12 +121,10 @@ function ChangeDirection(e){
 }
 
 
+
 function foodRandomPosition(){
     foodX = Math.floor((Math.random() * cols )) * blockSize
     foodY = Math.floor((Math.random() * rows )) * blockSize
 }
-
-
-
 
 

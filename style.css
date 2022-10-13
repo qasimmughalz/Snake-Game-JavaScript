@@ -2,15 +2,32 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
+
 
 
 body{
+    color:#fff;
+    background-image: url(img/snakebg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #0c1821;
+    background-position: center center;
     height: 100vh;
     display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
 }
-canvas{
-    border: 1px solid black;
+
+
+body::after{
+    content: '';
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 0, 0, 0.9);
+    z-index: -1;
 }
